@@ -19,14 +19,7 @@ function Shop() {
         })
             .then((response) => response.json())
             .then((data) => {
-                setGoods(
-                    data.featured.reduce((acc, item) => {
-                        if (acc.map((item) => item.id).includes(item.id)) {
-                            return acc;
-                        }
-                        return [...acc, item];
-                    }, [])
-                );
+                data.featured && setGoods(data.featured);
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
