@@ -1,22 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { ShopContext } from "../context";
 
-function Alert(props) {
-    const { name = "", closeAlert = Function.prototype } = props;
+function Alert() {
+    const { alertName = "", closeAlert } = useContext(ShopContext);
 
     useEffect(() => {
-        const timerId = setTimeout(closeAlert, 2300);
+        const timerId = setTimeout(closeAlert, 3000);
 
         return () => {
             clearTimeout(timerId);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [name]);
+    }, [alertName]);
     return (
         <>
             {window.innerWidth > 768 ? (
                 <div className="p-1 border-2 border-blue-600 rounded-lg mr-8">
                     <span className="text-blue-600">
-                        Товар {name} был добавлен в корзину
+                        Товар {alertName} был добавлен в корзину
                     </span>
                 </div>
             ) : null}

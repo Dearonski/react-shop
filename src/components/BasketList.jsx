@@ -1,13 +1,9 @@
 import { BasketItem } from "./BasketItem";
+import { ShopContext } from "../context";
+import { useContext } from "react";
 
-function BasketList(props) {
-    const {
-        order = [],
-        handleBacketShow = Function.prototype,
-        removeFromBacket = Function.prototype,
-        incQuantity = Function.prototype,
-        decQuantity = Function.prototype,
-    } = props;
+function BasketList() {
+    const { order = [], handleBasketShow } = useContext(ShopContext);
 
     const totalPrice = order.reduce(
         (sum, el) => sum + el.price * el.quantity,
@@ -27,7 +23,7 @@ function BasketList(props) {
                     strokeWidth={1.5}
                     stroke="currentColor"
                     className="w-8 h-8 cursor-pointer hover:text-blue-700 transition-all"
-                    onClick={handleBacketShow}
+                    onClick={handleBasketShow}
                 >
                     <path
                         strokeLinecap="round"
@@ -39,13 +35,7 @@ function BasketList(props) {
             <ul className="overflow-auto h-full">
                 {order.length ? (
                     order.map((item) => (
-                        <BasketItem
-                            key={item.id}
-                            item={item}
-                            removeFromBacket={removeFromBacket}
-                            incQuantity={incQuantity}
-                            decQuantity={decQuantity}
-                        />
+                        <BasketItem key={item.id} item={item} />
                     ))
                 ) : (
                     <li className="p-4 text-3xl font-semibold">

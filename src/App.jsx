@@ -1,7 +1,12 @@
 import Shop from "./components/Shop";
+import { ContextProvider } from "./context";
 
 function App() {
-    return <Shop />;
+    return (
+        <ContextProvider>
+            <Shop />
+        </ContextProvider>
+    );
 }
 
 export default App;

@@ -1,14 +1,15 @@
+import { useContext } from "react";
+import { ShopContext } from "../context";
+
 function BasketItem(props) {
     const { id, name, price, quantity, image } = props.item;
-    const {
-        removeFromBacket = Function.prototype,
-        incQuantity = Function.prototype,
-        decQuantity = Function.prototype,
-    } = props;
+
+    const { removeFromBasket, incQuantity, decQuantity } =
+        useContext(ShopContext);
 
     const deleteItem = (e, id) => {
         e.currentTarget.parentElement.parentElement.style.opacity = "0";
-        setTimeout(() => removeFromBacket(id), 300);
+        setTimeout(() => removeFromBasket(id), 300);
     };
 
     return (

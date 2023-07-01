@@ -1,12 +1,10 @@
+import { ShopContext } from "../context";
+import { useContext } from "react";
+
 function GoodsItem(props) {
-    const {
-        id,
-        name,
-        description,
-        price,
-        image,
-        addToBacket = Function.prototype,
-    } = props;
+    const { id, name, description, price, image } = props;
+
+    const { addToBasket } = useContext(ShopContext);
 
     return (
         <div id={id} className="w-72 flex flex-col justify-between">
@@ -34,7 +32,7 @@ function GoodsItem(props) {
                     <button
                         className="m-2 p-2 transition-all flex items-center hover:underline text-blue-600"
                         onClick={() =>
-                            addToBacket({
+                            addToBasket({
                                 id,
                                 name,
                                 price,

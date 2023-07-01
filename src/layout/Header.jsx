@@ -1,14 +1,12 @@
 import { Alert } from "../components/Alert";
 import { CSSTransition } from "react-transition-group";
+import { ShopContext } from "../context";
+import { useContext } from "react";
 
 function Header(props) {
-    const {
-        quantity = 0,
-        handleBacketShow = Function.prototype,
-        name = "",
-        showAlert = false,
-        closeAlert = Function.prototype,
-    } = props;
+    const { quantity = 0 } = props;
+
+    const { handleBasketShow, showAlert } = useContext(ShopContext);
 
     return (
         <nav className="bg-white flex justify-between sticky top-0 shadow-xl z-20">
@@ -18,7 +16,7 @@ function Header(props) {
 
             <div
                 className="cursor-pointer rounded-lg flex justify-center self-center p-4 text-gray-700 hover:text-blue-700 transition-all"
-                onClick={handleBacketShow}
+                onClick={handleBasketShow}
             >
                 <CSSTransition
                     in={showAlert}
@@ -26,9 +24,8 @@ function Header(props) {
                     timeout={300}
                     classNames="alert"
                 >
-                    <Alert name={name} closeAlert={closeAlert} />
+                    <Alert />
                 </CSSTransition>
-
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
