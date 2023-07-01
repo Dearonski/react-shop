@@ -1,9 +1,10 @@
 import { BasketItem } from "./BasketItem";
-import { ShopContext } from "../context";
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { handleBasketShow } from "../store/shopSlice";
 
 function BasketList() {
-    const { order = [], handleBasketShow } = useContext(ShopContext);
+    const { order = [] } = useSelector((state) => state.shops);
+    const dispatch = useDispatch();
 
     const totalPrice = order.reduce(
         (sum, el) => sum + el.price * el.quantity,
@@ -23,7 +24,7 @@ function BasketList() {
                     strokeWidth={1.5}
                     stroke="currentColor"
                     className="w-8 h-8 cursor-pointer hover:text-blue-700 transition-all"
-                    onClick={handleBasketShow}
+                    onClick={() => dispatch(handleBasketShow())}
                 >
                     <path
                         strokeLinecap="round"

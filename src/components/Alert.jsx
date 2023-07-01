@@ -1,11 +1,13 @@
-import { useEffect, useContext } from "react";
-import { ShopContext } from "../context";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { closeAlert } from "../store/shopSlice";
 
-function Alert() {
-    const { alertName = "", closeAlert } = useContext(ShopContext);
+function Alert(props) {
+    const { alertName = "" } = useSelector((state) => state.shops);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const timerId = setTimeout(closeAlert, 3000);
+        const timerId = setTimeout(() => dispatch(closeAlert()), 3000);
 
         return () => {
             clearTimeout(timerId);

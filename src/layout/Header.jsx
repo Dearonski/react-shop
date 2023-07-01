@@ -1,12 +1,13 @@
 import { Alert } from "../components/Alert";
 import { CSSTransition } from "react-transition-group";
-import { ShopContext } from "../context";
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { handleBasketShow } from "../store/shopSlice";
 
 function Header(props) {
     const { quantity = 0 } = props;
+    const { showAlert } = useSelector((state) => state.shops);
 
-    const { handleBasketShow, showAlert } = useContext(ShopContext);
+    const dispatch = useDispatch();
 
     return (
         <nav className="bg-white flex justify-between sticky top-0 shadow-xl z-20">
@@ -16,7 +17,7 @@ function Header(props) {
 
             <div
                 className="cursor-pointer rounded-lg flex justify-center self-center p-4 text-gray-700 hover:text-blue-700 transition-all"
-                onClick={handleBasketShow}
+                onClick={() => dispatch(handleBasketShow())}
             >
                 <CSSTransition
                     in={showAlert}

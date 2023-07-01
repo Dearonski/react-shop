@@ -1,10 +1,10 @@
-import { ShopContext } from "../context";
-import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../store/shopSlice";
 
 function GoodsItem(props) {
     const { id, name, description, price, image } = props;
 
-    const { addToBasket } = useContext(ShopContext);
+    const dispatch = useDispatch();
 
     return (
         <div id={id} className="w-72 flex flex-col justify-between">
@@ -32,12 +32,14 @@ function GoodsItem(props) {
                     <button
                         className="m-2 p-2 transition-all flex items-center hover:underline text-blue-600"
                         onClick={() =>
-                            addToBasket({
-                                id,
-                                name,
-                                price,
-                                image,
-                            })
+                            dispatch(
+                                addToBasket({
+                                    id,
+                                    name,
+                                    price,
+                                    image,
+                                })
+                            )
                         }
                     >
                         <span className="text-blue-600 text-2xl">Купить</span>

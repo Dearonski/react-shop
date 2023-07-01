@@ -1,15 +1,13 @@
-import { useContext } from "react";
-import { ShopContext } from "../context";
+import { useDispatch } from "react-redux";
+import { removeFromBasket, incQuantity, decQuantity } from "../store/shopSlice";
 
 function BasketItem(props) {
     const { id, name, price, quantity, image } = props.item;
-
-    const { removeFromBasket, incQuantity, decQuantity } =
-        useContext(ShopContext);
+    const dispatch = useDispatch();
 
     const deleteItem = (e, id) => {
         e.currentTarget.parentElement.parentElement.style.opacity = "0";
-        setTimeout(() => removeFromBasket(id), 300);
+        setTimeout(() => dispatch(removeFromBasket(id)), 300);
     };
 
     return (
@@ -44,7 +42,7 @@ function BasketItem(props) {
             <div className="md:col-span-3 flex justify-center text-2xl items-center col-span-6">
                 <button
                     className="w-12 h-12 bg-gray-200 rounded-xl hover:bg-gray-300 transition-all"
-                    onClick={() => incQuantity(id)}
+                    onClick={() => dispatch(incQuantity(id))}
                 >
                     +
                 </button>
@@ -55,7 +53,7 @@ function BasketItem(props) {
                         if (quantity === 1) {
                             deleteItem(e, id);
                         } else {
-                            decQuantity(id);
+                            dispatch(decQuantity(id));
                         }
                     }}
                 >
